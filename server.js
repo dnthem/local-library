@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Connect to MongoDB
-db().catch((err) => debugLog(err));
+db().catch((err) => console.log(err));
 
 // Routes
 app.use('/', indexRouter);
