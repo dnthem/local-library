@@ -1,0 +1,51 @@
+<form method="POST">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input id="title" class="form-control" type="text" placeholder="Name of book" name="title" required value="<%= book ? book.title : '' %>">
+  </div>
+  <div class="form-group">
+    <label for="author">Author:</label>
+    <select id="author" class="form-control" name="author" required>
+      <option value="">--Please select an author--</option>
+      <% authors.forEach(author => { %>
+        <% if (book && author._id.toString() === book.author._id.toString()) { %>
+          <option value="<%= author._id %>" selected><%= author.name %></option>
+        <% } else { %>
+          <option value="<%= author._id %>"><%= author.name %></option>
+        <% } %>
+      <% }); %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="summary">Summary:</label>
+    <textarea id="summary" class="form-control" placeholder="Summary" name="summary" required><%= book ? book.summary : '' %></textarea>
+  </div>
+  <div class="form-group">
+    <label for="isbn">ISBN:</label>
+    <input id="isbn" class="form-control" type="text" placeholder="ISBN13" name="isbn" required value="<%= book ? book.isbn : '' %>">
+  </div>
+  <div class="form-group">
+    <label>Genre:</label>
+    <div>
+      <% genres.forEach(genre => { %>
+        <div style="display: inline; padding-right:10px;">
+          <% if ( genre.checked ) { %>
+            <input class="checkbox-input" type="checkbox" name="genre" id="<%= genre._id %>" value="<%= genre._id %>" checked>
+          <% } else { %>
+            <input class="checkbox-input" type="checkbox" name="genre" id="<%= genre._id %>" value="<%= genre._id %>">
+          <% } %>
+          <label for="<%= genre._id %>">&nbsp;<%= genre.name %></label>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if (errors) { %>
+  <ul>
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }); %>
+  </ul>
+<% } %>

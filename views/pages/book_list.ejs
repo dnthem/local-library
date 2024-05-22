@@ -1,0 +1,21 @@
+
+<!-- Book list -->
+<% if (bookList.length > 0) { %>
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>Title</th>
+              <th>Author</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% bookList.forEach(book => { %>
+              <tr>
+                  <td><a href="<%= book.url %>"><%= book.title %></a></td>
+                  <td><%= book.author.name %></td>
+              </tr>
+          <% }); %>
+  </table>
+<% } else { %>
+  <p>No books.</p>
+<% } %>

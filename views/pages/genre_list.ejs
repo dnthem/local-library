@@ -1,0 +1,20 @@
+<% if (genreList.length) { %>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% genreList.forEach(genre => { %>
+                <tr>
+                    <td>
+                        <a href="<%= genre.url %>"><%= genre.name %></a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else { %>
+    <p>No genres.</p>
+<% } %>

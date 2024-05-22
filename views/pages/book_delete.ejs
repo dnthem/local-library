@@ -1,0 +1,54 @@
+<h2> Title: <%- book.title %> </h2>
+
+<% if (book_instances.length > 0) { %>
+  <h3>Book Instances</h3>
+  <p>
+    You have to delete all book instances before you can delete the book.
+  </p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>index</td>
+        <th>Imprint</th>
+        <th>Status</th>
+        <th>Due Back</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% book_instances.forEach((bookInstance, index) => { %>
+        <tr>
+          <td> <%= (index + 1) %> </td>
+          <td><%= bookInstance.imprint %></td>
+          <td>
+            <% if (bookInstance.status === 'Available') { %>
+              <span class="text-success"><%= bookInstance.status %></span>
+            <% } else if (bookInstance.status === 'Maintenance') { %>
+              <span class="text-danger"><%= bookInstance.status %></span>
+            <% } else { %>
+              <span class="text-warning"><%= bookInstance.status %></span>
+            <% } %>
+          </td>
+          <td>
+            <% if (bookInstance.status !== 'Available') { %>
+              <%= bookInstance.due_back_formatted %>
+            <% } %>
+          </td>
+          <td>
+            <a href="<%= bookInstance.url %>">View</a>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p><strong>
+    Are you sure you want to delete this book?
+  </strong></p>
+  <form method="POST">
+    <div class="form-group">
+      <input id="bookid" class="form-control" type="hidden" name="bookid" value="<%= book._id %>">
+    </div>
+    <button class="btn btn-primary" type="submit">Delete</button>
+  </form>
+<% } %>

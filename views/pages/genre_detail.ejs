@@ -1,0 +1,37 @@
+
+<h2>Genre: <%= genre.name %></h2>
+<div class="ms-3 mt-3">
+  
+  <h3 style="font-size: 1.5rem">Books</h3>
+  <% if (genreBooks.length > 0) { %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Summary</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <% genreBooks.forEach(book => { %>
+          <tr>
+            <td><a href="<%= book.url %>"><%= book.title %></a></td>
+           
+            <td><%= book.summary %></td>
+           
+           
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>No books.</p>
+  <% } %>
+</div>
+
+<hr>
+
+<p>
+  <a href="<%= genre.url + '/update' %>" class="btn btn-primary">Update Genre</a>
+  <a href="<%= genre.url + '/delete' %>" class="btn btn-danger">Delete Genre</a>
+</p>

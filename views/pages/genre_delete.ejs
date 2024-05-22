@@ -1,0 +1,39 @@
+<h2>Genre: <%- genre.name %></h2>
+
+<% if (genreBooks.length > 0) { %>
+  <p>
+    You cannot delete this genre because it has books associated with it.
+  </p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Summary</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% genreBooks.forEach(book => { %>
+        <tr>
+          <td><a href="<%= book.url %>"><%= book.title %></a></td>
+          
+          <td><%= book.summary %></td>
+          
+          
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p>
+    Are you sure you want to delete this genre?
+  </p>
+  <form method="POST">
+    <div class="form-group
+    ">
+      <input id="genreid" class="form-control" type="hidden" name="genreid" value="<%= genre._id %>">
+    </div>
+    <button class="btn btn-primary" type="submit">Delete</button>
+  </form>
+<% } %>
+

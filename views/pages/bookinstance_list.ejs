@@ -1,0 +1,38 @@
+<!-- Book instance list -->
+<% if (bookInstanceList.length > 0) { %>
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>Title</th>
+              <th>Imprint</th>
+              <th>Status</th>
+              <th>Due back</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% bookInstanceList.forEach(bookinstance => { %>
+              <tr>
+                  <td><a href="<%= bookinstance.url %>"><%= bookinstance.book.title %></a></td>
+                  <td><%= bookinstance.imprint %></td>
+                  <td 
+                      <% if (bookinstance.status == 'Available') { %>
+                          class="text-success"
+                      <% } else if (bookinstance.status == 'Maintenance') { %>
+                          class="text-danger"
+                      <% } else { %>
+                          class="text-warning"
+                      <% } %>
+                  ><%= bookinstance.status %></td>
+                  <td>
+                      <% if (bookinstance.status == 'Available') { %>
+                          <%= bookinstance.due_back_formatted %>
+                      <% } else { %>
+                          <%= bookinstance.status %>
+                      <% } %>
+                  </td>
+              </tr>
+          <% }); %>
+  </table>
+<% } else { %>
+  <p>No book instances.</p>
+<% } %>
